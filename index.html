@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sloth Test Page</title>
+	<style>
+		div {
+			height: 300px;
+
+			background: #BADA55;
+
+			margin: 10px;
+		}
+	</style>
+
+	<script src="globalizer.js"></script>
+	<script src="sloth.js"></script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+
+<script>
+	Sloth({
+		on: document.getElementsByTagName('div'),
+		threshold: -201,
+		callback: function(element){
+			for(var i = 0; i < 10000000;i++) {}
+			element.textContent = 'Work!';
+			element.style.backgroundColor = 'yellow';
+		}
+	});
+</script>
+</body>
+</html>
