@@ -1,0 +1,3 @@
+describe('Sloth library', function(){
+
+});
