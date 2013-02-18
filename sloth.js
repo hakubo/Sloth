@@ -1,11 +1,11 @@
 define('Sloth', function(){
-
 	//some private vars
 	var slice = Array.prototype.slice,
 		win = window,
-		scr = win.screen,
+		wTop,
+		wBottom,
 		undef,
-		delegate = win.setTimout,
+		delegate = win.setTimeout,
 		branches = [],
 		Branch = function(element, threshold, callback){
 			this.element = element;
@@ -14,29 +14,40 @@ define('Sloth', function(){
 				callback(element);
 			};
 		},
-		execute = function(event){
-			var i = branches.length-1,
+		execute = function(){
+			var i = branches.length,
 				branch;
-			console.time('call')
-			while(branch = branches[i--]){
-				if(branch.isVisible()) {
-					console.log(branch);
-					delegate(branch.callback,0);
-					branches.splice(i, 1);
+
+			if(!i) {
+				win.removeEventListener('scroll', execute);
+			} else {
+				wTop = win.scrollY;
+				wBottom = wTop + win.innerHeight;
+
+				while( i-- ){
+					branch = branches[i];
+
+					if (branch.isVisible()) {
+						delegate( branch.callback, 0 );
+						branches.splice(i, 1);
+					}
 				}
+
 			}
-			console.timeEnd('call')
 		};
 
 	Branch.prototype.isVisible = function(){
-		return (win.scrollY + scr.availHeight >= this.element.offsetTop - this.threshold);
+		var elem =  this.element,
+			threshold = this.threshold,
+			top = elem.offsetTop - threshold,
+			bottom = top + elem.offsetHeight + threshold;
+
+		return wBottom >= top && wTop <= bottom;
 	};
 
 	var setup = function(){
-		win.addEventListener('scroll', execute);
-
-		if(win.scrollY == 0 ) execute();
-		setup = undef;
+		execute();
+		branches.length && win.addEventListener('scroll', execute);
 	};
 
 	//return Sloth function
@@ -44,33 +55,24 @@ define('Sloth', function(){
 		if(params) {
 			var elements = params.on,
 				threshold = params.threshold !== undef ? params.threshold : 100,
-				callback = params.callback;
+				callback = params.callback,
+				i;
 
 			if(!elements) throw 'No elements passed';
 			if(!callback) throw 'No callback passed';
 
 			if(elements instanceof NodeList){
-				var i = elements.length;
+				elements = slice.call(elements);
+				i = elements.length;
 
-				while(i--) {
-					branches.push(new Branch(elements[i], threshold, callback))
-				}
+				while(i--) branches.push(new Branch(elements[i], threshold, callback));
 			}else {
 				branches.push(new Branch(elements, threshold, callback))
 			}
 
-			setup && setup();
+			setup();
 		} else{
 			throw 'Gimme some data';
 		}
-
 	}
 });
-
-
-//Sloth({
-// 	on: [], required
-//  threshold: 100, default: 100
-//  callback: function(){}, required
-//
-// })
