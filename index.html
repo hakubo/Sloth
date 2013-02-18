@@ -4,11 +4,33 @@
 	<title>Sloth Test Page</title>
 	<style>
 		div {
-			height: 300px;
+			height: 100px;
 
 			background: #BADA55;
 
 			margin: 10px;
+
+			-webkit-transition: all 2s;
+		}
+
+		.yellow {
+			background-color: red;
+		}
+
+		span {
+			display: block;
+
+			height: 50px;
+
+			background: brown;
+
+			margin: 5px;
+
+			-webkit-transition: all 2s;
+		}
+
+		.blue {
+			background-color: blue;
 		}
 	</style>
 
@@ -113,16 +135,35 @@
 <div></div>
 <div></div>
 <div></div>
+<span></span>
+<span></span>
+<span></span><span></span>
+<span></span>
+<span></span>
+
+<span></span>
+<span></span><span></span>
+<span></span>
+<span></span>
+
+<span></span>
+<span></span><span></span>
+<span></span>
+<span></span>
+
+<span></span>
+<span></span><span></span>
+<span></span>
+<span></span>
 
 
 <script>
 	Sloth({
 		on: document.getElementsByTagName('div'),
-		threshold: -201,
+		threshold: -100,
 		callback: function(element){
-			for(var i = 0; i < 10000000;i++) {}
 			element.textContent = 'Work!';
-			element.style.backgroundColor = 'yellow';
+			element.className = 'yellow';
 		}
 	});
 </script>
