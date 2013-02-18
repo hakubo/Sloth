@@ -45,11 +45,6 @@ define('Sloth', function(){
 		return wBottom >= top && wTop <= bottom;
 	};
 
-	var setup = function(){
-		execute();
-		branches.length && win.addEventListener('scroll', execute);
-	};
-
 	//return Sloth function
 	return function(params){
 		if(params) {
@@ -61,7 +56,7 @@ define('Sloth', function(){
 			if(!elements) throw 'No elements passed';
 			if(!callback) throw 'No callback passed';
 
-			if(elements instanceof NodeList){
+			if(elements.length !== undef){
 				elements = slice.call(elements);
 				i = elements.length;
 
@@ -70,7 +65,8 @@ define('Sloth', function(){
 				branches.push(new Branch(elements, threshold, callback))
 			}
 
-			setup();
+			execute();
+			branches.length && win.addEventListener('scroll', execute);
 		} else{
 			throw 'Gimme some data';
 		}
