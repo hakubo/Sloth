@@ -1,4 +1,4 @@
-define('Sloth', function(){
+define('sloth', function(){
 	//some private vars
 	var slice = Array.prototype.slice,
 		win = window,
@@ -18,13 +18,11 @@ define('Sloth', function(){
 			var i = branches.length,
 				branch;
 
-			if(!i) {
-				win.removeEventListener('scroll', execute);
-			} else {
+			if(i){
 				wTop = win.scrollY;
 				wBottom = wTop + win.innerHeight;
 
-				while( i-- ){
+				while(i--){
 					branch = branches[i];
 
 					if (branch.isVisible()) {
@@ -32,7 +30,8 @@ define('Sloth', function(){
 						branches.splice(i, 1);
 					}
 				}
-
+			}else{
+				win.removeEventListener('scroll', execute);
 			}
 		};
 
