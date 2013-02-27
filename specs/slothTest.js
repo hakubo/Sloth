@@ -22,7 +22,7 @@ describe('Sloth library', function(){
 			sloth({
 				on: document.body
 			})
-		}).toThrow('No callback passed');
+		}).toThrow('elements or callback missing');
 
 		expect(function(){
 			sloth({
@@ -30,7 +30,7 @@ describe('Sloth library', function(){
 
 				}
 			})
-		}).toThrow('No elements passed');
+		}).toThrow('elements or callback missing');
 	});
 
 	it('does nothing when no elements are registered', function(){
