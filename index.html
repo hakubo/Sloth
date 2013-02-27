@@ -33,8 +33,11 @@
 			background-color: blue;
 		}
 	</style>
-
-	<script src="globalizer.js"></script>
+	<script>
+		define = function(name, def){
+			window[name] = def();
+		};
+	</script>
 	<script src="sloth.js"></script>
 </head>
 <body>
@@ -158,9 +161,9 @@
 
 
 <script>
-	Sloth({
+	sloth({
 		on: document.getElementsByTagName('div'),
-		threshold: -100,
+		threshold: 100,
 		callback: function(element){
 			element.textContent = 'Work!';
 			element.className = 'yellow';
