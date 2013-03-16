@@ -16,7 +16,7 @@ describe('Sloth library', function(){
 	it('throws exceptions when required parameters are not passed', function(){
 		expect(function(){
 			sloth()
-		}).toThrow('Gimme some data');
+		}).not.toThrow();
 
 		expect(function(){
 			sloth({
