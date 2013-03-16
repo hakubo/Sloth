@@ -67,8 +67,6 @@
 
 				execute();
 				branches.length && context.addEventListener('scroll', execute);
-			} else{
-				throw 'Data please';
 			}
 		}
 	}
