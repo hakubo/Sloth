@@ -9,6 +9,31 @@
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
     <title>Sloth</title>
+	  <style>
+		 #demo div {
+			  height: 100px;
+
+			  background: #4AA329;
+
+			  margin: 10px;
+
+			  text-align: center;
+			  font-size: 4em;
+			  line-height: 100px;
+
+			 border: 3px solid;
+			 border-radius: 3px;
+
+			 -webkit-transition: all 2s;
+			 -moz-transition: all 2s;
+			 -o-transition: all 2s;
+			 transition: all 2s;
+		  }
+
+		  #demo .color {
+			  background-color: #0090ff;
+		  }
+	  </style>
   </head>
 
   <body>
@@ -95,9 +120,36 @@ so you don't have to guess what to do on which element</p>
 
 <p>As seen on
 <a href="http://microjs.com/#sloth">http://microjs.com/#sloth</a></p>
-      </section>
-    </div>
 
+		  <p>Demo (Warning - this demo is infinite!)
+		  </p>
+		  <section id=demo>
+			  <div></div>
+		  </section>
+	  </section>
+    </div>
+	<script src="javascripts/sloth.js"></script>
+	<script>
+		var i = 0,
+			demo = document.querySelector('#demo'),
+			niceCallback = function(element){
+				element.className = 'color';
+				element.textContent = i++;
+
+				demo.insertAdjacentHTML('beforeend', '<div></div>');
+
+				sloth({
+					on: demo.querySelector('div:last-child'),
+					threshold: -50,
+					callback: niceCallback
+				});
+			};
+
+		sloth({
+			on: demo.querySelector('div'),
+			callback: niceCallback
+		});
+	</script>
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
