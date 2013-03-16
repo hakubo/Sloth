@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Sloth : Library to lazy initialize components of a webpage when they become visible" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Sloth</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/hakubo/Sloth">View on GitHub</a>
+
+          <h1 id="project_title">Sloth</h1>
+          <h2 id="project_tagline">Library to lazy initialize components of a webpage when they become visible</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/hakubo/Sloth/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/hakubo/Sloth/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Library to lazy initialize components of a webpage when they become visible</p>
+
+<p>it listens to scroll event only when some callbacks were registered</p>
+
+<p>Features:</p>
+
+<ul>
+<li>no dependencies</li>
+<li>fires callback for elements that become visible</li>
+<li>support for threshold - so it can fire callback right before or after an element is visible</li>
+<li>uses AMD</li>
+<li>uses global sloth if no amd defined</li>
+<li>removes listener when it has nothing to do</li>
+<li>works when scrolling down and up</li>
+<li>459B(!) - minified and gzipped</li>
+</ul><p>Basic usage:</p>
+
+<pre><code>sloth({
+    on: element/array of element/node list,
+    threshold: no of pixels [OPTIONAL] - default: 100
+    callback: function to call when element is visible - as parameter it gets element that become visible
+});
+</code></pre>
+
+<p>example:</p>
+
+<pre><code>require(['sloth'], function(sloth){
+    sloth({
+        on: document.getElementsByTagName('div'),
+        threshold: 100
+        callback: function(element){
+            element.className += ' visible';
+        }
+    });
+});
+</code></pre>
+
+<p>or if you don't use any amd framework</p>
+
+<pre><code>    sloth({
+        on: document.getElementsByTagName('div'),
+        threshold: 100
+        callback: function(element){
+            element.className += ' visible';
+        }
+    });
+</code></pre>
+
+<p>Parameters:</p>
+
+<p>on - element or elements that you want to fire callback on
+it can be a single element, a NodeList or an regular array of elements
+callback will be fired for all of these elements</p>
+
+<p>threshold - a threshold that sloth should use 100 is a default value
+means that callback will be fired when element is 100px away from being visible
+you can also pass negative number so callback will be called after an element is visible</p>
+
+<p>callback - is a callback to fire when an element is visible (duh...)
+there is one parameter passed to callback and this is an element that has just become visible
+so you don't have to guess what to do on which element</p>
+
+<p>As seen on
+<a href="http://microjs.com/#sloth">http://microjs.com/#sloth</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Sloth maintained by <a href="https://github.com/hakubo">hakubo</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
