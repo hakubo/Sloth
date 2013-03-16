@@ -1,72 +1,81 @@
-define('sloth', function(){
-	//some private vars
-	var slice = [].slice,
-		win = window,
-		wTop,
-		wBottom,
-		undef,
-		delegate = win.setTimeout,
-		branches = [],
-		Branch = function(element, threshold, callback){
-			this.element = element;
-			this.threshold = threshold;
-			this.callback = function(){
-				callback(element);
-			};
-		},
-		execute = function(){
-			var i = branches.length,
-				branch;
+(function(context){
+	'use strict';
 
-			if(i){
-				wTop = win.scrollY;
-				wBottom = wTop + win.innerHeight;
+	function sloth(){
+		//some private vars
+		var slice = Array.prototype.slice,
+			wTop,
+			wBottom,
+			undef,
+			delegate = context.setTimeout,
+			branches = [],
+			Branch = function(element, threshold, callback){
+				this.element = element;
+				this.threshold = threshold;
+				this.callback = function(){
+					callback(element);
+				};
+			},
+			execute = function(){
+				var i = branches.length,
+					branch;
 
-				while(i--){
-					branch = branches[i];
+				if(i){
+					wTop = context.scrollY;
+					wBottom = wTop + context.innerHeight;
 
-					if (branch.visible()) {
-						delegate( branch.callback, 0 );
-						branches.splice(i, 1);
+					while(i--){
+						branch = branches[i];
+
+						if (branch.visible()) {
+							delegate( branch.callback, 0 );
+							branches.splice(i, 1);
+						}
 					}
+				}else{
+					context.removeEventListener('scroll', execute);
 				}
-			}else{
-				win.removeEventListener('scroll', execute);
-			}
+			};
+
+		Branch.prototype.visible = function(){
+			var elem =  this.element,
+				threshold = this.threshold,
+				top = elem.offsetTop - threshold,
+				bottom = top + elem.offsetHeight + threshold;
+
+			return wBottom >= top && wTop <= bottom;
 		};
 
-	Branch.prototype.visible = function(){
-		var elem =  this.element,
-			threshold = this.threshold,
-			top = elem.offsetTop - threshold,
-			bottom = top + elem.offsetHeight + threshold;
+		//return Sloth function
+		return function(params){
+			if(params) {
+				var elements = params.on,
+					threshold = params.threshold !== undef ? params.threshold : 100,
+					callback = params.callback,
+					i;
 
-		return wBottom >= top && wTop <= bottom;
-	};
+				if(!elements || !callback) throw 'elements or callback missing';
 
-	//return Sloth function
-	return function(params){
-		if(params) {
-			var elements = params.on,
-				threshold = params.threshold !== undef ? params.threshold : 100,
-				callback = params.callback,
-				i;
+				if(elements.length !== undef){
+					elements = slice.call(elements);
+					i = elements.length;
 
-			if(!elements || !callback) throw 'elements or callback missing';
+					while(i--) branches.push(new Branch(elements[i], threshold, callback));
+				}else {
+					branches.push(new Branch(elements, threshold, callback))
+				}
 
-			if(elements.length !== undef){
-				elements = slice.call(elements);
-				i = elements.length;
-
-				while(i--) branches.push(new Branch(elements[i], threshold, callback));
-			}else {
-				branches.push(new Branch(elements, threshold, callback))
+				execute();
+				branches.length && context.addEventListener('scroll', execute);
+			} else{
+				throw 'Data please';
 			}
-
-			execute();
-			branches.length && win.addEventListener('scroll', execute);
-		} else{
-			throw 'Gimme some data';
 		}
 	}
-});
+
+	if(context.define && context.define.amd) {
+		context.define('sloth', sloth);
+	}else{
+		context.sloth = sloth();
+	}
+})(this);

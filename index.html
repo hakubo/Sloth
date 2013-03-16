@@ -16,8 +16,11 @@
 			-webkit-transition: all 1s;
 			-webkit-transform: scale(.7) rotateY(-180deg) translate(300px);
 
-			-webkit-perspective: 800;
-			-webkit-transform-style: preserve-3d;
+			-moz-transition: all 1s;
+			-moz-transform: scale(.7) rotateY(-180deg) translate(300px);
+
+			transition: all 1s;
+			transform: scale(.7) rotateY(-180deg) translate(300px);
 
 			color: #FF9D40;
 			text-align: center;
@@ -30,14 +33,11 @@
 		.color {
 			background-color: #9FEE00;
 			-webkit-transform: scale(1);
+			-moz-transform: scale(1);
+			transform: scale(1);
 		}
 	</style>
-	<script>
-		define = function(name, def){
-			window[name] = def();
-		};
-	</script>
-	<script src="sloth.js"></script>
+	<script src="sloth.max.js"></script>
 </head>
 <body>
 <div></div>
