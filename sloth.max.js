@@ -1,9 +1,9 @@
 (function(context){
-	'use strict';
-
 	function sloth(){
 		//some private vars
-		var slice = Array.prototype.slice,
+		var proto = 'prototype',
+			scroll = 'scroll',
+			slice = Array[proto].slice,
 			wTop,
 			wBottom,
 			undef,
@@ -33,11 +33,11 @@
 						}
 					}
 				}else{
-					context.removeEventListener('scroll', execute);
+					context.removeEventListener(scroll, execute);
 				}
 			};
 
-		Branch.prototype.visible = function(){
+		Branch[proto].visible = function(){
 			var elem =  this.element,
 				threshold = this.threshold,
 				top = elem.offsetTop - threshold,
@@ -66,7 +66,7 @@
 				}
 
 				execute();
-				branches.length && context.addEventListener('scroll', execute);
+				branches.length && context.addEventListener(scroll, execute);
 			}
 		}
 	}
