@@ -21,7 +21,7 @@
 					branch;
 
 				if(i){
-					wTop = context.scrollY;
+					wTop = context.scrollY || context.pageYOffset;
 					wBottom = wTop + context.innerHeight;
 
 					while(i--){
