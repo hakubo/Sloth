@@ -1,0 +1,26 @@
+{
+  "name": "Sloth",
+  "main": "Sloth.js",
+  "homepage": "https://github.com/rockfield/Sloth",
+  "authors": [
+    "philipp <philipp.b@ya.ru>"
+  ],
+  "description": "Library to lazy initialize components of a webpage when they become visible.",
+  "keywords": [
+    "lazy",
+    "initialize",
+    "webpage",
+    "visible",
+    "view",
+    "appearing",
+    "appear"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
