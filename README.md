@@ -25,7 +25,7 @@ example:
 	require(['sloth'], function(sloth){
 		sloth({
     		on: document.getElementsByTagName('div'),
-    		threshold: 100
+    		threshold: 100,
     		callback: function(element){
     			element.className += ' visible';
     		}
@@ -36,7 +36,7 @@ or if you don't use any amd framework
 
 		sloth({
     		on: document.getElementsByTagName('div'),
-    		threshold: 100
+    		threshold: 100,
     		callback: function(element){
     			element.className += ' visible';
     		}
