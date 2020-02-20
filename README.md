@@ -16,7 +16,7 @@ Basic usage:
 
 	sloth({
 		on: element/array of element/node list,
-		threshold: no of pixels [OPTIONAL] - default: 100
+		threshold: no of pixels [OPTIONAL] - default: 100,
 		callback: function to call when element is visible - as parameter it gets element that become visible
 	});
 
@@ -24,19 +24,19 @@ example:
 
 	require(['sloth'], function(sloth){
 		sloth({
-    		on: document.getElementsByTagName('div'),
-    		threshold: 100
-    		callback: function(element){
-    			element.className += ' visible';
-    		}
-    	});
+    			on: document.getElementsByTagName('div'),
+    			threshold: 100,
+    			callback: function(element){
+    				element.className += ' visible';
+    			}
+    		});
 	});
 
 or if you don't use any amd framework
 
-		sloth({
+	sloth({
     		on: document.getElementsByTagName('div'),
-    		threshold: 100
+    		threshold: 100,
     		callback: function(element){
     			element.className += ' visible';
     		}
